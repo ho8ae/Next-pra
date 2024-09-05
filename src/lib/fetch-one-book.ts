@@ -1,4 +1,4 @@
-import { BookData } from "@/type";
+import { BookData } from "@/types";
 
 export default async function fetchOneBook(id:number):Promise<BookData | null>{
 //에러 시 null 값 반환되니까 union으로 타입 정의

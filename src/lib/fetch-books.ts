@@ -1,4 +1,4 @@
-import { BookData } from "@/type";
+import { BookData } from "@/types";
 
 export default async function fetchBooks(q?:string) : Promise<BookData[]> {
     //비동기는 반환 값이 Promise

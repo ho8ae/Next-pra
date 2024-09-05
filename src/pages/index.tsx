@@ -3,12 +3,12 @@ import style from "./index.module.css";
 import SeacrhableLaout from "@/components/searchable-layout";
 import books from "@/mock/books.json"; //@ 는 src를 가리키는 것
 import BookItem from "@/components/book-item";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-rendom-books";
 
-//서버 사이드 렌더링 방식
-export const getServerSideProps = async () => {
+//서버 사이드 렌더링 방식 getServerSideProps
+export const getStaticProps = async () => {
   //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
 
 
@@ -16,6 +16,7 @@ export const getServerSideProps = async () => {
 
   // const allBooks = await fetchBooks()
   // const recoBooks = await fetchRandomBooks();
+  console.log("인덱스페이지");
 
   const [allBooks,recoBooks] = await Promise.all([ //Promise type으로 가지고 오네.;;
     fetchBooks(),
@@ -28,12 +29,8 @@ export const getServerSideProps = async () => {
 
 };
 
-export default function Home({ allBooks,recoBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-
-  
-
-
-
+export default function Home({ allBooks,recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
+  //InferGetStaticPropsType 자동으로 추론해서 props type을 정의해주는거임
 
   return (
     <div className={style.container}>
