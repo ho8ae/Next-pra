@@ -18,18 +18,19 @@ export const getStaticProps = async () => {
   // const recoBooks = await fetchRandomBooks();
   console.log("인덱스페이지");
 
-  const [allBooks,recoBooks] = await Promise.all([ //Promise type으로 가지고 오네.;;
+  const [allBooks, recoBooks] = await Promise.all([ //Promise type으로 가지고 오네.;;
     fetchBooks(),
     fetchRandomBooks(),
   ])
 
   return {
-    props: { allBooks,recoBooks },
+    props: { allBooks, recoBooks },
+    revalidate: 3,
   };
 
 };
 
-export default function Home({ allBooks,recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ allBooks, recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
   //InferGetStaticPropsType 자동으로 추론해서 props type을 정의해주는거임
 
   return (
